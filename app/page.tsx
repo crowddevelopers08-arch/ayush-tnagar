@@ -1,43 +1,42 @@
+import type { Metadata } from "next"
 
-import Commonheader from "@/components/commonheader"
-import CommonheroSection from "@/components/commonhero"
-import Commonfour from "@/components/commonfour"
-import Commonfive from "@/components/commonfive"
-import Commontestimonials from "@/components/commonreview"
-import Commonvideo from "@/components/commonvideo"
-import Commonmap from "@/components/commonmap"
-import Backthird from "@/components/backthird"
-import Commonchatbot from "@/components/commonchatbot"
-import StackedScrollCards from "@/components/commonthird"
+import Header from "@/components/tnagar/Header"
+import Hero from "@/components/tnagar/Hero"
+import Offers from "@/components/tnagar/Offers"
+import BookingForm from "@/components/tnagar/BookingForm"
+import StackedScrollCards from "@/components/tnagar/StackedScrollCards"
+import Plans from "@/components/tnagar/Plans"
+import Stories from "@/components/tnagar/Stories"
+import VideoTestimonials from "@/components/tnagar/VideoTestimonials"
+import Faq from "@/components/tnagar/Faq"
+import Visit from "@/components/tnagar/Visit"
+import Footer from "@/components/tnagar/Footer"
+import StickyCta from "@/components/tnagar/StickyCta"
 
+export const metadata: Metadata = {
+  title: "Ayush Ortho — T. Nagar | Non-Surgical Pain Relief in Chennai",
+  description:
+    "Knee, back, neck, shoulder and hip pain treated in 7, 14 or 21 days at Ayush Ortho, N Boag Road, T. Nagar. Ayurveda, Varma therapy and orthopaedic manual therapy. No surgery, no injections.",
+  alternates: { canonical: "https://tnagar.ayushortho.in/" },
+}
 
-
-export default function HomePage() {
+export default function TnagarPage() {
   return (
-    <>
-    <main className="min-h-screen">
-      <Commonheader />
-      <section id="hero">
-      <CommonheroSection />
-      </section>
-      <section id="trusted-pain-relief">
-      <Commonfour />
-      </section>
-      <section id="treatments">
-      <StackedScrollCards />
-      </section>
-      <section id="who-is-this-for">
-      <Commonfive />
-      </section>
-      <section id="reviews">
-      <Commontestimonials /> 
-      </section>
-      {/* <section id="testimonials">
-      <Commonvideo /> 
-      </section> */}
-      <Commonchatbot />
-      <Commonmap />
-    </main>
-    </>
+    <div className="tnagar scroll-smooth max-[760px]:pb-[76px]">
+      <Header />
+      <main>
+        <Hero />
+        <Offers />
+        <BookingForm />
+        <StackedScrollCards />
+        <VideoTestimonials />        
+        <Plans />
+        <Stories />
+        <Faq />
+        <Visit />
+      </main>
+      <Footer />
+      <StickyCta />
+    </div>
   )
 }

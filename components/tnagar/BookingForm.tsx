@@ -47,7 +47,7 @@ export default function BookingForm() {
       }
       track("lead_submit", { branch: "T. Nagar", area: payload.area })
       setDone(true)
-      window.location.href = "/tnagar/thank-you"
+      window.location.href = "/thank-you"
     } catch {
       setSubmitting(false)
       alert("That did not go through. Please call +91 91500 10389 instead.")

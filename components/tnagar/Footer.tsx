@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-[1140px] px-6">
         <div className="flex flex-wrap justify-between gap-4 text-[0.78rem]">
           <span>© 2026 Ayush Ortho. All rights reserved.</span>
-          <a href="/tnagar/privacy-policy" className="font-semibold text-white">
+          <a href="/privacy-policy" className="font-semibold text-white">
             Privacy policy
           </a>
         </div>
