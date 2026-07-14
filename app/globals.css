@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to match gold (#d09a40) and black (#000000) design brief */
+  --background: oklch(1 0 0); /* White background */
+  --foreground: oklch(0 0 0); /* Black text */
+  --card: oklch(0.98 0 0); /* Light card background */
+  --card-foreground: oklch(0 0 0); /* Black card text */
+  --popover: oklch(1 0 0); /* White popover */
+  --popover-foreground: oklch(0 0 0); /* Black popover text */
+  --primary: oklch(0.7 0.15 85); /* Gold primary color #d09a40 */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.75 0.08 85); /* Soft gold secondary #c5b299 */
+  --secondary-foreground: oklch(0 0 0); /* Black text on secondary */
+  --muted: oklch(0.97 0 0); /* Light muted background */
+  --muted-foreground: oklch(0.4 0 0); /* Dark muted text */
+  --accent: oklch(0.7 0.15 85); /* Gold accent */
+  --accent-foreground: oklch(0 0 0); /* Black accent text */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.7 0.15 85); /* Gold borders */
+  --input: oklch(1 0 0); /* White input background */
+  --ring: oklch(0.7 0.15 85); /* Gold focus ring */
+  --chart-1: oklch(0.7 0.15 85);
+  --chart-2: oklch(0.75 0.08 85);
+  --chart-3: oklch(0 0 0);
+  --chart-4: oklch(0.97 0 0);
+  --chart-5: oklch(0.4 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.97 0 0);
+  --sidebar-foreground: oklch(0 0 0);
+  --sidebar-primary: oklch(0.7 0.15 85);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.75 0.08 85);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0.7 0.15 85);
+  --sidebar-ring: oklch(0.7 0.15 85);
+}
+
+.dark {
+  --background: oklch(0 0 0); /* Black background */
+  --foreground: oklch(1 0 0); /* White text */
+  --card: oklch(0.05 0 0); /* Dark card background */
+  --card-foreground: oklch(1 0 0); /* White card text */
+  --popover: oklch(0 0 0); /* Black popover */
+  --popover-foreground: oklch(1 0 0); /* White popover text */
+  --primary: oklch(0.7 0.15 85); /* Gold primary remains same */
+  --primary-foreground: oklch(0 0 0); /* Black text on gold */
+  --secondary: oklch(0.15 0 0); /* Dark secondary */
+  --secondary-foreground: oklch(1 0 0); /* White secondary text */
+  --muted: oklch(0.1 0 0); /* Dark muted */
+  --muted-foreground: oklch(0.6 0 0); /* Light muted text */
+  --accent: oklch(0.7 0.15 85); /* Gold accent */
+  --accent-foreground: oklch(0 0 0); /* Black accent text */
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.15 0 0); /* Dark border */
+  --input: oklch(0.05 0 0); /* Dark input */
+  --ring: oklch(0.7 0.15 85); /* Gold focus ring */
+  --chart-1: oklch(0.7 0.15 85);
+  --chart-2: oklch(0.75 0.08 85);
+  --chart-3: oklch(1 0 0);
+  --chart-4: oklch(0.15 0 0);
+  --chart-5: oklch(0.6 0 0);
+  --sidebar: oklch(0.05 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.7 0.15 85);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.15 0 0);
+  --sidebar-ring: oklch(0.7 0.15 85);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added custom animations for advanced landing page effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+}
+
+/* ============================================================
+   T. NAGAR LANDING PAGE  — scoped styles
+   (brand tokens differ from the global gold/black theme, so
+   everything is namespaced under .tnagar to stay isolated)
+   ============================================================ */
+.tnagar {
+  /* brand tokens aligned with the other Ayush Ortho pages (coral red) */
+  --t-deep: #e13e20;
+  --t-jade: #c1341a;
+  --t-saffron: #e13e20;
+  --t-ink: #16241f;
+  --t-muted: #5e6e68;
+  --t-bone: #f7f6f1;
+  --t-line: #e1e8e4;
+  --font-fraunces: "Outfit", system-ui, sans-serif;
+  --font-instrument: "Outfit", system-ui, sans-serif;
+  font-family: "Outfit", system-ui, -apple-system, sans-serif;
+  background: var(--t-bone);
+  color: var(--t-ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  /* clip (not hidden) so horizontal overflow is contained without turning
+     .tnagar into a scroll container — hidden breaks the sticky stacked cards */
+  overflow-x: clip;
+}
+.tnagar h1,
+.tnagar h2,
+.tnagar h3 {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+.tnagar :focus-visible {
+  outline: 2px solid var(--t-saffron);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* hero highlighted word */
+.tnagar .hero-em {
+  font-style: normal;
+  color: var(--t-deep);
+  position: relative;
+  white-space: nowrap;
+}
+.tnagar .hero-em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.06em;
+  height: 0.28em;
+  background: var(--t-saffron);
+  opacity: 0.22;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* hero layout — mobile stacks top → map → bottom (buttons); desktop is
+   copy-left / map-right via grid areas */
+.tnagar .hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "top" "map" "bottom";
+  column-gap: 64px;
+  row-gap: 28px;
+}
+.tnagar .hero-top {
+  grid-area: top;
+}
+.tnagar .hero-map {
+  grid-area: map;
+}
+.tnagar .hero-bottom {
+  grid-area: bottom;
+}
+@media (min-width: 981px) {
+  .tnagar .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas:
+      "top map"
+      "bottom map";
+    row-gap: 0;
+  }
+  .tnagar .hero-top {
+    align-self: end;
+  }
+  .tnagar .hero-bottom {
+    align-self: start;
+  }
+  .tnagar .hero-map {
+    align-self: center;
+  }
+}
+
+/* mobile offers — infinite marquee */
+.tnagar .offers-marquee {
+  display: flex;
+  width: max-content;
+  animation: tnagar-marquee 20s linear infinite;
+}
+.tnagar .offers-marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tnagar .offers-marquee {
+    animation: none;
+  }
+}
+
+/* mobile condition pills — infinite marquee */
+.tnagar .pill-marquee {
+  display: flex;
+  width: max-content;
+  animation: tnagar-marquee 16s linear infinite;
+}
+.tnagar .pill-marquee:hover {
+  animation-play-state: paused;
+}
+@keyframes tnagar-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tnagar .pill-marquee {
+    animation: none;
+  }
+}
+
+/* body map svg */
+.tnagar .fig {
+  fill: none;
+  stroke: var(--t-deep);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.42;
+}
+.tnagar .node {
+  fill: #fff;
+  stroke: var(--t-deep);
+  stroke-width: 7;
+  opacity: 0.5;
+}
+/* the figure scales down on mobile, so thicken the strokes there so it
+   doesn't look thin */
+@media (max-width: 760px) {
+  .tnagar .fig {
+    stroke-width: 13;
+  }
+  .tnagar .node {
+    stroke-width: 10;
+  }
+}
+.tnagar .pt {
+  cursor: pointer;
+}
+.tnagar .pt-halo {
+  fill: var(--t-saffron);
+  opacity: 0.16;
+  transform-origin: center;
+}
+.tnagar .pt-dot {
+  fill: var(--t-saffron);
+  stroke: var(--t-bone);
+  stroke-width: 2;
+}
+.tnagar .pt-label {
+  font-family: var(--font-instrument), sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--t-muted);
+  transition: fill 0.2s ease;
+}
+.tnagar .pt:hover .pt-label,
+.tnagar .pt.on .pt-label {
+  fill: var(--t-ink);
+  font-weight: 600;
+}
+.tnagar .pt.on .pt-dot {
+  r: 7.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tnagar .pt-halo {
+    animation: tnagar-pulse 2.6s ease-in-out infinite;
+  }
+  .tnagar .pt:nth-of-type(2) .pt-halo {
+    animation-delay: 0.5s;
+  }
+  .tnagar .pt:nth-of-type(3) .pt-halo {
+    animation-delay: 1s;
+  }
+  .tnagar .pt:nth-of-type(4) .pt-halo {
+    animation-delay: 1.5s;
+  }
+  .tnagar .pt:nth-of-type(5) .pt-halo {
+    animation-delay: 2s;
+  }
+}
+@keyframes tnagar-pulse {
+  0%,
+  100% {
+    transform: scale(0.72);
+    opacity: 0.16;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.05;
+  }
+}
+
+/* scroll reveal */
+.tnagar .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.tnagar .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tnagar .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tnagar * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* 
+body{
+  overflow: hidden;
+  height: 100vh;
+} */
