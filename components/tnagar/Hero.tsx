@@ -77,7 +77,7 @@ export default function Hero() {
         {/* copy — top: eyebrow, heading, paragraph */}
         <div className="hero-top">
           <p className="flex items-center gap-[10px] text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#c1341a] before:h-px before:w-[26px] before:flex-none before:bg-[#e13e20] before:content-['']">
-            N Boag Road · T. Nagar, Chennai
+            T. Nagar, Chennai
           </p>
           <h1 className="my-[18px] text-[clamp(2.1rem,4.6vw,3.5rem)]">
             Relieve pain in <span className="hero-em">7 to 21 days</span>. Without surgery.
