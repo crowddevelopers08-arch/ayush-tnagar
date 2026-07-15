@@ -27,7 +27,7 @@ const PrivacyPolicy: React.FC = () => {
           <div className="mb-8 rounded-lg border-l-4 border-[#e13e20] bg-orange-50 p-4 sm:p-6">
             <p className="text-base text-gray-700 sm:text-lg">
               At <span className="font-semibold text-[#e13e20]">Ayush Ortho</span>, we are committed to protecting your
-              privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you
+              privacy. This Privacy Policy explains how we collect, use, and safeguard your personal informations when you
               interact with us.
             </p>
           </div>
