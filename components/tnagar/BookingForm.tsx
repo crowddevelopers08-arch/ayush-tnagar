@@ -4,9 +4,8 @@ import { useEffect, useRef, useState } from "react"
 import Reveal from "./Reveal"
 import { track } from "./track"
 
-/* Paste your lead endpoint here (TeleCRM / Zapier / Google Sheets webhook).
-   Leave blank to test the UI only. */
-const LEAD_ENDPOINT = ""
+/* Leads are saved to our database and pushed to TeleCRM via this API route. */
+const LEAD_ENDPOINT = "/api/leads"
 
 export default function BookingForm() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -36,16 +35,30 @@ export default function BookingForm() {
     }
 
     setSubmitting(true)
-    const payload = Object.fromEntries(new FormData(form).entries())
+    const raw = Object.fromEntries(new FormData(form).entries()) as Record<string, string>
+
+    // Map form fields to the /api/leads payload shape.
+    const payload = {
+      name: raw.name,
+      phone: raw.phone,
+      area: raw.area,
+      duration: raw.since,
+      branch: raw.branch || "T. Nagar",
+      source: raw.utm_source || "direct",
+      medium: raw.utm_medium || "",
+      campaign: raw.utm_campaign || "",
+      pageUrl: raw.page_url || (typeof window !== "undefined" ? window.location.href : ""),
+    }
+
     try {
-      if (LEAD_ENDPOINT) {
-        await fetch(LEAD_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        })
-      }
-      track("lead_submit", { branch: "T. Nagar", area: payload.area })
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error(`Request failed with ${res.status}`)
+
+      track("lead_submit", { branch: "T. Nagar", area: raw.area })
       setDone(true)
       window.location.href = "/thank-you"
     } catch {

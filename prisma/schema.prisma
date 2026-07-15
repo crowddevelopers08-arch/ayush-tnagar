@@ -9,22 +9,21 @@ datasource db {
 }
 
 model Lead {
-  id            String   @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String
-  email         String
   phone         String
-  age           String?
-  areaOfPain    String?
-  treatmentPlan String?
-  city          String?
-  source        String?
-  formName      String?
+  area          String? // where it hurts (Knee, Back / spine, ...)
+  duration      String? // how long it has been (Under 3 months, ...)
+  branch        String?    @default("T. Nagar")
+  source        String? // utm_source or "direct"
+  medium        String? // utm_medium
+  campaign      String? // utm_campaign
+  pageUrl       String? // full landing-page URL the lead came from
   status        LeadStatus @default(NEW)
-  telecrmSynced Boolean   @default(false)
+  telecrmSynced Boolean    @default(false)
   telecrmId     String?
-  consent       Boolean   @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 
   @@map("leads")
 }

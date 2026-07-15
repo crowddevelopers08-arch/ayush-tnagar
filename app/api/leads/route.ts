@@ -1,44 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
+import { sendToTeleCRM } from '@/lib/telecrm'
 
-const prisma = new PrismaClient()
+export const runtime = 'nodejs'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
-    
+
     const leads = await prisma.lead.findMany({
-      orderBy: {
-        createdAt: 'desc'
-      },
-      where: status && status !== 'all' ? { status: status as any } : undefined
+      orderBy: { createdAt: 'desc' },
+      where: status && status !== 'all' ? { status: status as any } : undefined,
     })
 
     return NextResponse.json({ leads })
   } catch (error) {
     console.error('Error fetching leads:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
 export async function POST(request: NextRequest) {
+  let savedLead: { id: string } | null = null
+
   try {
     const body = await request.json()
     const {
       name,
-      email,
       phone,
-      age,
-      areaOfPain,
-      treatmentPlan,
-      city,
+      area,
+      duration,
+      branch,
       source,
-      consent,
-      formName
+      medium,
+      campaign,
+      pageUrl,
     } = body
 
     if (!name || !phone) {
@@ -48,32 +45,60 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const lead = await prisma.lead.create({
+    // 1) Save to the database first so no lead is ever lost.
+    savedLead = await prisma.lead.create({
       data: {
         name,
-        email,
         phone,
-        age: age || '',
-        areaOfPain: areaOfPain || '',
-        treatmentPlan: treatmentPlan || '',
-        city: city || '',
+        area: area || null,
+        duration: duration || null,
+        branch: branch || 'T. Nagar',
         source: source || 'direct',
-        formName: formName || 'unknown',
-        consent: consent || false,
+        medium: medium || null,
+        campaign: campaign || null,
+        pageUrl: pageUrl || null,
         status: 'NEW',
-        telecrmSynced: false
-      }
+        telecrmSynced: false,
+      },
     })
 
-    return NextResponse.json({ 
-      success: true, 
-      lead,
-      message: 'Lead created successfully' 
+    // 2) Best-effort push to TeleCRM; record the outcome on the lead.
+    let telecrmSynced = false
+    let telecrmError: string | null = null
+    try {
+      const result = await sendToTeleCRM({
+        name,
+        phone,
+        area,
+        duration,
+        branch: branch || 'T. Nagar',
+        source,
+        medium,
+        campaign,
+        pageUrl,
+      })
+      telecrmSynced = result.synced
+      await prisma.lead.update({
+        where: { id: savedLead.id },
+        data: { telecrmSynced: result.synced, telecrmId: result.telecrmId },
+      })
+    } catch (error) {
+      telecrmError = error instanceof Error ? error.message : String(error)
+      console.error('TeleCRM sync failed:', telecrmError)
+    }
+
+    return NextResponse.json({
+      success: true,
+      lead: savedLead,
+      telecrmSynced,
+      message: telecrmError
+        ? 'Lead saved but TeleCRM sync failed'
+        : 'Lead created successfully',
     })
   } catch (error) {
     console.error('Error creating lead:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', leadSaved: !!savedLead },
       { status: 500 }
     )
   }
