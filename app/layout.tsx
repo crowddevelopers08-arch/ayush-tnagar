@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`}>
       <head>
-        {/* Google Ads Tag */}
+        {/* Google Ads Tag - AW-18044684782 */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-18044684782"
@@ -55,6 +55,22 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'AW-18044684782');
+            `,
+          }}
+        />
+
+        {/* Google Ads Tag - AW-16893156876 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16893156876"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-16893156876');
             `,
           }}
         />
