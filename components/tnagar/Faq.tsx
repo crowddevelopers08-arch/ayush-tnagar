@@ -35,7 +35,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Do you have any offers?",
-    a: "Free consultation every Thursday for patients aged 65 and above, and 15% off for armed forces personnel and their families.",
+    a: "Yes, 15% off for armed forces personnel and their families.",
   },
 ]
 

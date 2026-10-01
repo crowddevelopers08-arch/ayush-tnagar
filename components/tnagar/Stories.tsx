@@ -54,7 +54,7 @@ const REVIEWS = [
     color: "#43A047",
     time: "1 week ago",
     rating: 5,
-    text: "My mother is 68 and could barely stand. The Thursday free consultation got us started and she is so much better. Thank you Ayush Ortho.",
+    text: "My mother is 68 and could barely stand. The first consultation got us started and she is so much better. Thank you Ayush Ortho.",
   },
 ]
 

@@ -1,5 +1,4 @@
 const OFFERS = [
-  { b: "Every Thursday", p: "Free consultation for patients aged 65 and above." },
   { b: "Defence families", p: "15% off for armed forces personnel and their families." },
   { b: "Around your workday", p: "Short sessions, evening slots. Walk in, walk out." },
 ]
@@ -9,7 +8,7 @@ export default function Offers() {
     <section className="bg-[#e13e20] text-white">
       {/* Desktop / tablet — 3-column grid */}
       <div className="mx-auto hidden w-full max-w-[1140px] px-6 min-[640px]:block">
-        <div className="grid grid-cols-3 gap-px bg-[rgba(255,255,255,0.14)]">
+        <div className="grid grid-cols-2 gap-px bg-[rgba(255,255,255,0.14)]">
           {OFFERS.map((o) => (
             <div key={o.b} className="bg-[#e13e20] px-7 py-[26px]">
               <b className="mb-[6px] block text-[0.7rem] font-semibold uppercase tracking-[0.13em] text-[#fddfd7]">
